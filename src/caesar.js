@@ -35,7 +35,7 @@ const caesarModule = (function () {
       return false;
     }
 
-    // your solution code here
+    // shfif letter when !letter.match(regex)
     if (encode) {
 
       encryptWord = encryptWord.map( (letter) => {
