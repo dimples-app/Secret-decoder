@@ -1,71 +1,81 @@
 const caesarModule = (function () {
   // you can add any code you want within this function scope
-  const encryptedMessage = "";
-  const regex = /[A-Z]/gi
+
+  
+  const regex = "[a-zA-Z]";
 
   /**
-   * Helper Function to shift character
-   * @param {letter} any 
-   * @param {shift} any
+   *  Helper function to convert input to lowercase
+   * @param {*} input 
+   * @returns string with lower case
+   */
+
+  function convertToLowerCase(input) {
+    const stringWithLowerCase = input.toLowerCase();
+    return stringWithLowerCase;
+  } 
+
+  /**
+   *  Helper function to shift letter
+   * @param {*} letter 
+   * @param {*} shift 
    * @returns 
    */
 
-  function shiftingCharacter(letter, shift) {
-    const encryptedLetter = "";
-    const currentLetterCode = letter.charCodeAt(0);
-    const newLetterCode = currentLetterCode + shift;
+  function shiftletter(letter, shift) {
+    let newLetter ="";
+    let currentLetter = letter.charCodeAt(0);
+    let newLetterCode = currentLetter + shift;
 
     if (newLetterCode < 97) {
       newLetterCode += 26;
     } else if (newLetterCode > 122) {
       newLetterCode -= 26;
-    } 
+    }
+    newLetter = String.fromCharCode(newLetterCode);
 
-    encryptedLetter = letter.fromCharCode(newLetterCode);
-
-  return encryptedLetter;
-
+    return newLetter;
   }
+
+  /**
+   * function with caesar shift algorithm
+   * @param {*} input 
+   * @param {*} shift 
+   * @param {*} encode 
+   * @returns  
+   */
 
   function caesar(input, shift, encode = true) {
 
-    const encryptWord = input.split(" ");
+    let encryptedMessage = "";
+    const inputInLowercase = convertToLowerCase(input);
+    let messageToBeEncrypted = [...inputInLowercase];
 
-    if (shift === 0 || shift < -25 || shift > 25 || !shift) {
+    if( !shift || shift === 0 || shift < -25 || shift > 25 ) {
       return false;
     }
 
-    // shfif letter when !letter.match(regex)
     if (encode) {
+       messageToBeEncrypted = messageToBeEncrypted.forEach ((char) => {
+        if (!char.match(regex)) {
+          return encryptedMessage += char;
+        }
+         encryptedMessage += shiftletter(char, shift);        
+      })
 
-      encryptWord = encryptWord.map( (letter) => {
-        if (!letter.match(regex)) {
-          return letter;
-        } 
-        const rightShift = shiftingCharacter(letter, shift);    
-        console.log(rightShift);
-        return  rightShift
-      });
-     
+       //console.log(encryptedMessage);
     } else {
 
-      encryptWord = encryptWord.map( (letter) => {
-        if (!letter.match(regex)) {
-          return letter;
-        } 
-        const leftShift = shiftingCharacter(letter, shift * -1);  
-        console.log(leftShift);
-        return leftShift;
-
-      });
-    } 
-    
-    encryptedMessage = encryptWord.join("");
-
+      messageToBeEncrypted = messageToBeEncrypted.forEach ((char) => {
+        if (!char.match(regex)) {
+          return encryptedMessage += char;
+        }
+         encryptedMessage += shiftletter(char, shift);        
+      })
       console.log(encryptedMessage);
+    }
       return encryptedMessage;
-   
-  }
+  } 
   return {
     caesar,
   };
