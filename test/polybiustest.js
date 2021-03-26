@@ -4,16 +4,24 @@ const expect = require("chai").expect;
 describe("polybius", () => {
     it("should return encoded string", () => {
     
-    const input = "HiWorld";
+    const input = "hiworld";
     const expected = "32422543241341";
     const actual = polybius(input);
     expect(actual).to.equal(expected);
     });
 
-    it("should return encoded string with space intact and no uppercase", () => {
+    it("should return encoded string with space intact", () => {
     
     const input = "Hello World";
     const expected = "3251131343 2543241341";
+    const actual = polybius(input);
+    expect(actual).to.equal(expected);
+    });
+
+    it("should return encoded string without uppercase", () => {
+    
+    const input = "HiWorld";
+    const expected = "32422543241341";
     const actual = polybius(input);
     expect(actual).to.equal(expected);
     });
@@ -54,6 +62,14 @@ describe("polybius", () => {
     const input = "Hello";
     const actual = polybius(input, false);
     expect(actual).to.false;
+    });
+
+    it("should return encoded string with i and j", () => {
+    
+    const input = "Hi J";
+    const expected = "3242 42";
+    const actual = polybius(input);
+    expect(actual).to.equal(expected);
     });
   
 });
