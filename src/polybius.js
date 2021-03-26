@@ -84,7 +84,7 @@ const polybiusModule = (function () {
   }
 
   /**
-   * Input string
+   * Input string when encoding is true else decode
    * @param {*} input 
    * @param {*} encode 
    * @returns message 
@@ -101,7 +101,7 @@ const polybiusModule = (function () {
     }
     
     if(encode) {
-
+      // convert character to number and retun encrypted message
       messageToconvert = messageToconvert.forEach ((char) => {
         if (!char.match(regex)) {
           return message += char;
@@ -121,6 +121,7 @@ const polybiusModule = (function () {
         }
       });
 
+      // return false if array.length is odd
       if(messageArr.length % 2 !== 0) {
         return false;
       }
