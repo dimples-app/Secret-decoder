@@ -1,4 +1,4 @@
-# Secret-decoder
+# Secret-Decoder
 
 ---
 
